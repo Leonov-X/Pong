@@ -12,9 +12,26 @@ namespace Pong
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        internal enum GameState
+        {
+            SplashScreen,
+            Menu,
+            Gameplay,
+            EndOfGame,
+        }
+
+        internal static GameState state;
+
+        SplashScreen splashScreen;
+
         public AppGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.IsFullScreen = false;
+            graphics.ApplyChanges();
+
             Content.RootDirectory = "Content";
         }
 
@@ -23,7 +40,8 @@ namespace Pong
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Добавить свою логику инициализации
+            state = GameState.SplashScreen;
+            splashScreen = new SplashScreen(GraphicsDevice);
 
             base.Initialize();
         }
@@ -36,7 +54,7 @@ namespace Pong
             // SpriteBatch используется для отрисовки текстур.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: Добавить загрузку игрового контента
+            splashScreen.LoadContent(Content);
         }
 
         /// <summary>
@@ -56,7 +74,12 @@ namespace Pong
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Обнавление логики
+            switch (state)
+            {
+                case GameState.SplashScreen:
+                    splashScreen.Update(gameTime);
+                    break;
+            }
 
             base.Update(gameTime);
         }
@@ -67,9 +90,16 @@ namespace Pong
         /// <param name="gameTime">Время прошедшее с начала игры</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Отрисовка тут
+            spriteBatch.Begin();
+            switch (state)
+            {
+                case GameState.SplashScreen:
+                    splashScreen.Draw(spriteBatch);
+                    break;
+            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
