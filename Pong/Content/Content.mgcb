@@ -1,9 +1,9 @@
 
 #----------------------------- Global Properties ----------------------------#
 
-/outputDir:../bin/Debug/netcoreapp2.1/Content/
-/intermediateDir:../obj/Debug/netcoreapp2.1/Content/
-/platform:Windows
+/outputDir:../Content
+/intermediateDir:../obj/Debug/netcoreapp2.1/Content
+/platform:DesktopGL
 /config:
 /profile:Reach
 /compress:False
@@ -12,6 +12,13 @@
 
 
 #---------------------------------- Content ---------------------------------#
+
+#begin calibri.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:calibri.spritefont
 
 #begin logo.png
 /importer:TextureImporter
@@ -24,4 +31,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:logo.png
+
+#begin music.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Low
+/build:music.mp3
+
+#begin splashScreen.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:splashScreen.mp3
 

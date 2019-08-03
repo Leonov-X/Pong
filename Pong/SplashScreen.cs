@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace Pong
 {
@@ -13,8 +14,8 @@ namespace Pong
         int width = 200;
         Vector2 position;
         Color color;
-        int appearanceTime = 1;
-        int deliveryTime = 2;
+        int appearanceTime = 2;
+        int deliveryTime = 3;
 
         public SplashScreen(GraphicsDevice graphicsDevice)
         {
@@ -26,6 +27,8 @@ namespace Pong
         internal void LoadContent(ContentManager content)
         {
             logo = content.Load<Texture2D>("logo");
+            Song song = content.Load<Song>("splashScreen");
+            MediaPlayer.Play(song);
         }
 
         internal void Update(GameTime gameTime)
